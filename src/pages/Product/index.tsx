@@ -1,6 +1,8 @@
 import Hero from '../../components/Hero'
 import Section from '../../components/Section'
 
+import Galery from '../../components/Galery'
+
 const Product = () => {
   return (
     <>
@@ -19,9 +21,7 @@ const Product = () => {
           Entertainment
         </p>
       </Section>
-      <Section title="Galeria" background="black">
-        <div>fotos</div>
-      </Section>
+      <Galery />
     </>
   )
 }
