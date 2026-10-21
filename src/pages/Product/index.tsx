@@ -2,6 +2,7 @@ import Hero from '../../components/Hero'
 import Section from '../../components/Section'
 
 import Galery from '../../components/Galery'
+import residentEvil from '../../assets/images/resident.png'
 
 const Product = () => {
   return (
@@ -21,7 +22,7 @@ const Product = () => {
           Entertainment
         </p>
       </Section>
-      <Galery />
+      <Galery name="jogo teste" defaultCover={residentEvil} />
     </>
   )
 }
