@@ -8,11 +8,7 @@ import zoom from '../../assets/images/zoom.png'
 import hogwarts from '../../assets/images/fundo_hogwarts.png'
 import fechar from '../../assets/images/fechar.png'
 import { useState } from 'react'
-
-interface GalleryItem {
-  type: 'image' | 'video'
-  url: string
-}
+import { GalleryItem } from '../../pages/Home'
 
 const mock: GalleryItem[] = [
   {
