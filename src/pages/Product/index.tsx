@@ -3,26 +3,49 @@ import Section from '../../components/Section'
 
 import Galery from '../../components/Galery'
 import residentEvil from '../../assets/images/resident.png'
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
+import { Game } from '../Home'
 
 const Product = () => {
+  const { id } = useParams()
+
+  const [game, setGame] = useState<Game>()
+
+  useEffect(() => {
+    fetch(`https://api-ebac.vercel.app/api/eplay/jogos/${id}`)
+      .then((res) => res.json())
+      .then((res) => setGame(res))
+  }, [id])
+
+  if (!game) {
+    return <h4>...Carregando</h4>
+  }
+
   return (
     <>
-      <Hero />
+      <Hero game={game} />
       <Section title="Sobre o jogo" background="black">
-        <p>
-          Hogwarts Legacy é um RPG de ação imersivo e de mundo aberto ambientado
-          no mundo introduzido pela primeira vez nos livros do Harry Potter.
-        </p>
+        <p>{game.description}</p>
       </Section>
       <Section title="Mais detalhes" background="gray">
         <p>
-          <b>Plataforma:</b> PlayStation 5 <br />
-          <b>Desenvolvedor:</b> Avalanche Software <br />
-          <b>Editora: </b>Portkey Games, subsidiária da Warner Bros. Interactive
-          Entertainment
+          <b>Plataforma: </b>
+          {game.details.system}
+          <br />
+          <b>Desenvolvedor: </b>
+          {game.details.developer}
+          <br />
+          <b>Editora: </b> {game.details.publisher}
+          <b>Idioma: </b> O jogo oferece suporte a diversos idiomas, incluindo{' '}
+          {game.details.languages.join(', ')}
         </p>
       </Section>
-      <Galery name="jogo teste" defaultCover={residentEvil} />
+      <Galery
+        name={game.name}
+        defaultCover={game.media.cover}
+        items={game.media.gallery}
+      />
     </>
   )
 }
