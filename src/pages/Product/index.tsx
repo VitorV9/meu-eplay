@@ -2,21 +2,12 @@ import Hero from '../../components/Hero'
 import Section from '../../components/Section'
 
 import Galery from '../../components/Galery'
-import residentEvil from '../../assets/images/resident.png'
-import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { Game } from '../Home'
+import { useGetGameQuery } from '../../services/api'
 
 const Product = () => {
   const { id } = useParams()
-
-  const [game, setGame] = useState<Game>()
-
-  useEffect(() => {
-    fetch(`https://api-ebac.vercel.app/api/eplay/jogos/${id}`)
-      .then((res) => res.json())
-      .then((res) => setGame(res))
-  }, [id])
+  const { data: game } = useGetGameQuery(id!)
 
   if (!game) {
     return <h4>...Carregando</h4>
